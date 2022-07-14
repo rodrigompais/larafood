@@ -103,7 +103,7 @@
 
     {{-- Custom Scripts --}}
     @yield('adminlte_js')
-
+    <script src="https://kit.fontawesome.com/5b734b9433.js" crossorigin="anonymous"></script>
 </body>
 
 </html>
