@@ -10,9 +10,8 @@
     <div class="card">
         <div class="card-body">
             <form action="{{ route('details.plan.store', $plan->url) }}" method="post">
-
-                @include('admin.pages.plans.details._partials.form')
-                
+                @csrf
+                @include('admin.pages.plans.details._partials.form')                
             </form>
         </div>
     </div>

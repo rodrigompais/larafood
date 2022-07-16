@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin\DetailPlan;
 use App\Models\Admin\Plan;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreUpdateDetailPlan;
 
 class DetailPlanController extends Controller
 {
@@ -43,7 +44,7 @@ class DetailPlanController extends Controller
         ]);
     }
 
-    public function store(Request $request, $urlPlan)
+    public function store(StoreUpdateDetailPlan $request, $urlPlan)
     {
         if(!$plan = $this->plan->where('url', $urlPlan)->first()) {
             return redirect()->back();
@@ -53,4 +54,33 @@ class DetailPlanController extends Controller
 
         return redirect()->route('details.plan.index', $plan->url);
     }
+
+    public function edit($urlPlan, $idDetail)
+    {
+        $plan = $this->plan->where('url', $urlPlan)->first();
+        $detail = $this->repository->find($idDetail);
+
+        if(!$plan || !$detail) {
+            return redirect()->back();
+        }
+
+        return view('admin.pages.plans.details.edit',[
+            'plan'      => $plan,
+            'detail'    => $detail,
+        ]);
+    }
+
+    public function update(StoreUpdateDetailPlan $request, $urlPlan, $idDetail)
+    {
+        $plan = $this->plan->where('url', $urlPlan)->first();
+        $detail = $this->repository->find($idDetail);
+        
+        if(!$plan || !$detail) {
+            return redirect()->back();
+        }
+        
+        $detail->update($request->all());
+
+        return redirect()->route('details.plan.index', [$plan->url]);       
+    }    
 }
