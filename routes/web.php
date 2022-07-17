@@ -4,6 +4,10 @@
 Route::prefix('admin')
             ->namespace('Admin')
             ->group(function () {
+/**
+ * Routes Profiles
+ */
+    Route::resource('profiles', 'ACL\ProfileController');
 
 /**
  * Routes Details Plans

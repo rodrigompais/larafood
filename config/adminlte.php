@@ -228,7 +228,12 @@ return [
         [
             'text'          => 'Planos',
             'url'           => 'admin/plans',
-            'icon'           => 'fa fa-list-alt',
+            'icon'           => 'fas fa-list-alt',
+        ],
+        [
+            'text'          => 'Perfis',
+            'url'           => 'admin/profiles',
+            'icon'           => 'fas fa-address-book',
         ],
     ],
 
