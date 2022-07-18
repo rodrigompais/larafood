@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\ACL;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Profile;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreUpdateProfile;
 
 class ProfileController extends Controller
 {
@@ -39,10 +40,10 @@ class ProfileController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreUpdateProfile $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUpdateProfile $request)
     {
         $this->repository->create($request->all());
 
@@ -57,7 +58,11 @@ class ProfileController extends Controller
      */
     public function show($id)
     {
+        if (!$profile = $this->repository->find($id)) {
+            return redirect()->back();
+        }
 
+        return view('admin.pages.profiles.show', compact('profile'));
     }
 
     /**
@@ -78,11 +83,11 @@ class ProfileController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreUpdateProfile $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreUpdateProfile $request, $id)
     {
         if (!$profile = $this->repository->find($id)) {
             return redirect()->back();
@@ -101,6 +106,12 @@ class ProfileController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if (!$profile = $this->repository->find($id)) {
+            return redirect()->back();
+        }
+
+        $profile->delete();
+
+        return redirect()->route('profiles.index');
     }
 }
