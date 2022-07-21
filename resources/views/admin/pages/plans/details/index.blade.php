@@ -21,8 +21,8 @@
                         <tr>
                             <td>{{ $detail->name }}</td>
                             <td style="width=10px">
-                                <a href="{{ route('details.plan.edit', [$plan->url, $detail->id]) }}" class="btn btn-info">EDITAR</a>
-                                <a href="{{ route('plans.show', $plan->url) }}" class="btn btn-warning">VER</a>
+                                <a href="{{ route('details.plan.edit', [$plan->url, $detail->id]) }}" class="btn btn-info">Editar</a>
+                                <a href="{{ route('details.plan.show', [$plan->url, $detail->id]) }}" class="btn btn-warning">Ver</a>
                             </td>
                         </tr>
                     @endforeach
