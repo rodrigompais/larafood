@@ -9,11 +9,11 @@
 @section('content')
     <div class="card">
         <div class="card-body">
-            <table class="table table-condensed">
+            <table class="table table-condensed table-sm">
                 <thead>
                     <tr>
                         <th>Nome</th>
-                        <th width="200">Ações</th>
+                        <th width="100">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -21,8 +21,8 @@
                         <tr>
                             <td>{{ $detail->name }}</td>
                             <td style="width=10px">
-                                <a href="{{ route('details.plan.edit', [$plan->url, $detail->id]) }}" class="btn btn-info">Editar</a>
-                                <a href="{{ route('details.plan.show', [$plan->url, $detail->id]) }}" class="btn btn-warning">Ver</a>
+                                <a href="{{ route('details.plan.edit', [$plan->url, $detail->id]) }}" class="btn btn-outline-info btn-sm"><i class="fas fa-edit"></i></a>
+                                <a href="{{ route('details.plan.show', [$plan->url, $detail->id]) }}" class="btn btn-outline-warning btn-sm"><i class="fas fa-eye"></i></a>
                             </td>
                         </tr>
                     @endforeach

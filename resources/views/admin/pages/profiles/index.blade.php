@@ -16,21 +16,21 @@
             </form>
         </div>
         <div class="card-body">
-            <table class="table table-condensed">
+            <table class="table table-condensed table-sm">
                 <thead>
                     <tr>
                         <th>Nome</th>
-                        <th width="240">Ações</th>
+                        <th width="125">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($profiles as $profile)
                         <tr>
                             <td>{{ $profile->name }}</td>
-                            <td style="width=10px">
-                                {{-- <a href="{{ route('details.plan.index', $profile->url) }}" class="btn btn-primary">Detalhes</a> --}}
-                                <a href="{{ route('profiles.edit', $profile->id) }}" class="btn btn-info">Editar</a>
-                                <a href="{{ route('profiles.show', $profile->id) }}" class="btn btn-warning">Ver</a>
+                            <td style="width=10px">                                
+                                <a href="{{ route('profiles.edit', $profile->id) }}" class="btn btn-outline-info btn-sm"><i class="fas fa-edit"></i></a>
+                                <a href="{{ route('profiles.show', $profile->id) }}" class="btn btn-outline-warning btn-sm"><i class="fas fa-eye"></i></a>
+                                <a href="{{ route('profiles.permissions', $profile->id) }}" class="btn btn-outline-primary btn-sm"><i class="fas fa-lock"></i></a>
                             </td>
                         </tr>
                     @endforeach
