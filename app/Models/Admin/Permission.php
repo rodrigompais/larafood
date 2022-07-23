@@ -10,6 +10,6 @@ class Permission extends Model
 
     public function profiles()
     {
-        $this->belongsToMany(Profile::class);
+        return $this->belongsToMany(Profile::class);
     }
 }

@@ -3,10 +3,7 @@
 @section('title', "Permissões do perfil {$profile->name}")
 
 @section('content_header')
-    <h1>Permissões do perfil <strong>{{ $profile->name }}</strong>
-        <a href="{{ route('profiles.permissions.available', $profile->id) }}" class="btn btn-dark">
-            <i class="fa fa-plus" aria-hidden="true"></i> ADD NOVA PERMISSÃO</a>
-    </h1>
+    <h1>Permissões do perfil <strong>{{ $profile->name }}</strong></h1>
 @stop
 
 @section('content')
@@ -14,7 +11,8 @@
         <div class="card-header">
             <form action="{{ route('profiles.search') }}" method="post" class="form form-inline">
                 @csrf
-                <input type="text" name="filter" placeholder="Nome" class="form-control" value="{{ $filters['filter'] ?? '' }}">
+                <input type="text" name="filter" placeholder="Nome" class="form-control"
+                    value="{{ $filters['filter'] ?? '' }}">
                 <button type="submit" class="btn btn-dark"><i class="fa fa-search"></i> Filtro </button>
             </form>
         </div>
@@ -22,20 +20,28 @@
             <table class="table table-condensed table-sm">
                 <thead>
                     <tr>
+                        <th width="125px">#</th>
                         <th>Nome</th>
-                        <th width="125">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($permissions as $permission)
+                    <form action="{{route('profiles.permissions.attach', $profile->id )}}" method="post">
+                        @csrf    
+                        @foreach ($permissions as $permission)
+                            <tr>
+                                <td>
+                                    <input type="checkbox" name="permissions[]" value="{{ $permission->id }}">
+                                </td>
+                                <td>{{ $permission->name }}</td>
+                            </tr>
+                        @endforeach
                         <tr>
-                            <td>{{ $permission->name }}</td>
-                            <td style="width=10px">
-                                <a href="{{ route('profiles.permissions', $profile->id) }}"
-                                    class="btn btn-outline-info btn-sm"><i class="fas fa-edit"></i></a>
+                            <td colspan="500">
+                                @include('admin.includes.alerts')
+                                <button type="submit" class="btn btn-outline-success btn-sm">Vincular</button>
                             </td>
                         </tr>
-                    @endforeach
+                    </form>
                 </tbody>
             </table>
         </div>
