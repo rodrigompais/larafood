@@ -20,7 +20,7 @@
                 <thead>
                     <tr>
                         <th>Nome</th>
-                        <th width="125">Ações</th>
+                        <th width="150">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,6 +31,7 @@
                                 <a href="{{ route('profiles.edit', $profile->id) }}" class="btn btn-outline-info btn-sm"><i class="fas fa-edit"></i></a>
                                 <a href="{{ route('profiles.show', $profile->id) }}" class="btn btn-outline-warning btn-sm"><i class="fas fa-eye"></i></a>
                                 <a href="{{ route('profiles.permissions', $profile->id) }}" class="btn btn-outline-primary btn-sm"><i class="fas fa-lock"></i></a>
+                                <a href="{{ route('profiles.plans', $profile->id) }}" class="btn btn-outline-info btn-sm"><i class="fas fa-list-alt"></i></a>
                             </td>
                         </tr>
                     @endforeach

@@ -4,6 +4,16 @@
 Route::prefix('admin')
             ->namespace('Admin')
             ->group(function () {
+
+/**
+ * Routes Plan x Profile
+ */
+Route::get('plans/{id}/profile/{idProfile}/detach', 'ACL\PlanProfileController@detachPlanProfile')->name('plans.profile.detach');
+Route::post('plans/{id}/profiles', 'ACL\PlanProfileController@attachProfilesProfile')->name('plans.profiles.attach');    
+Route::any('plans/{id}/profiles/create', 'ACL\PlanProfileController@profilesAvailable')->name('plans.profiles.available');
+Route::get('plans/{id}/profiles', 'ACL\PlanProfileController@profiles')->name('plans.profiles');
+Route::get('profiles/{id}/plans', 'ACL\PlanProfileController@plans')->name('profiles.plans');
+
 /**
  * Routes Permission x Profile
  */
@@ -11,7 +21,7 @@ Route::prefix('admin')
     Route::post('profiles/{id}/permissions', 'ACL\PermissionProfileController@attachPermissionProfile')->name('profiles.permissions.attach');    
     Route::any('profiles/{id}/permissions/create', 'ACL\PermissionProfileController@permissionsAvailable')->name('profiles.permissions.available');
     Route::get('profiles/{id}/permissions', 'ACL\PermissionProfileController@permissions')->name('profiles.permissions');
-    Route::get('permissions/{id}/profiles', 'ACL\PermissionProfileController@profiles')->name('permissions.profiles');
+    Route::get('permissions/{id}/profile', 'ACL\PermissionProfileController@profiles')->name('permissions.profiles');
 
 /**
  * Routes Permissions
