@@ -8,10 +8,10 @@ Route::prefix('admin')
  * Routes Permission x Profile
  */
     Route::get('profiles/{id}/permissions/{idPermission}/detach', 'ACL\PermissionProfileController@detachPermissionProfile')->name('profiles.permissions.detach');
-    Route::post('profiles/{id}/permissions', 'ACL\PermissionProfileController@attachPermissionProfile')->name('profiles.permissions.attach');
-    //Route::any('profiles/{id}/permissions/search', 'ACL\PermissionProfileController@filterPermissionsAvailable')->name('profiles.permissions.available.search');
+    Route::post('profiles/{id}/permissions', 'ACL\PermissionProfileController@attachPermissionProfile')->name('profiles.permissions.attach');    
     Route::any('profiles/{id}/permissions/create', 'ACL\PermissionProfileController@permissionsAvailable')->name('profiles.permissions.available');
     Route::get('profiles/{id}/permissions', 'ACL\PermissionProfileController@permissions')->name('profiles.permissions');
+    Route::get('permissions/{id}/profiles', 'ACL\PermissionProfileController@profiles')->name('permissions.profiles');
 
 /**
  * Routes Permissions
