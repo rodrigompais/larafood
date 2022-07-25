@@ -4,7 +4,7 @@
 
 @section('content_header')
     <h1>Perfis do plano <strong>{{ $plan->name }}</strong>
-        <a href="{{ route('plans.permissions.available', $plan->id) }}" class="btn btn-dark">
+        <a href="{{ route('plans.profiles.available', $plan->id) }}" class="btn btn-dark">
             <i class="fa fa-plus" aria-hidden="true"></i> ADD NOVA PERFIL</a>
     </h1>
 @stop

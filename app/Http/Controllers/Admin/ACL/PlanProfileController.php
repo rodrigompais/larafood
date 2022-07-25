@@ -41,31 +41,28 @@ class PlanProfileController extends Controller
 
     public function profilesAvailable(Request $request, $idPlan)
     {
-        $plan = $this->plan->find($idPlan);
-
-        if (!$plan) {
+        if (!$plan = $this->plan->find($idPlan)) {
             return redirect()->back();
         }
 
-        $filter = $request->except('_token');
+        $filters = $request->except('_token');
 
         $profiles = $plan->profilesAvailable($request->filter);
 
-        return view('admin.pages.plans.profiles.available', compact('plan', 'profiles','filter'));
+        return view('admin.pages.plans.profiles.available', compact('plan', 'profiles','filters'));
     }
 
-    public function attachProfilePlan(Request $request, $idPlan)
+    public function attachProfilesPlan(Request $request, $idPlan)
     {
-        $plan = $this->plan->find($idPlan);
-
-        if (!$plan) {
+        
+        if (!$plan = $this->plan->find($idPlan)) {
             return redirect()->back();
         }
 
         if (!$request->profiles || count($request->profiles) == 0) {
             return redirect()            
                         ->back()
-                        ->with('info', 'Precisa escolher pelo menos uma permissão!');
+                        ->with('info', 'Precisa escolher pelo menos um plano!');
         }
 
         $plan->profiles()->attach($request->profiles);
@@ -73,7 +70,7 @@ class PlanProfileController extends Controller
         return redirect()->route('plans.profiles', $plan->id);
     }
 
-    public function detachProfilePlan($idPlan, $idProfile)
+    public function detachProfilesPlan($idPlan, $idProfile)
     {
         $plan = $this->plan->find($idPlan);
         $profile = $this->profile->find($idProfile);
@@ -85,7 +82,7 @@ class PlanProfileController extends Controller
         $plan->profiles()->detach($profile);
 
         return redirect()
-                    ->route('plans.profiles', $plan->id)
-                    ->with('message', 'Desvinculado com sucesso!');
+                    ->route('plans.profiles', $plan->id);
+                    //->with('message', 'Desvinculado com sucesso!');
     }
 }
