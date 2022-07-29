@@ -47,9 +47,10 @@ class UserController extends Controller
     {
         $data = $request->all();
         $data['tenant_id'] = auth()->user()->tenant_id;
+        $data['password'] = bcrypt($data['password']);
 
         $this->repository->create($data);
-        
+
         return redirect()->route('users.index');
     }
 
@@ -65,7 +66,7 @@ class UserController extends Controller
             return redirect()->back();
         }
 
-        return view('admin.pages.users.show', compact('profile'));
+        return view('admin.pages.users.show', compact('user'));
     }
 
     /**
@@ -80,7 +81,7 @@ class UserController extends Controller
             return redirect()->back();
         }
 
-        return view('admin.pages.users.edit', compact('profile'));
+        return view('admin.pages.users.edit', compact('user'));
     }
 
     /**
@@ -96,7 +97,13 @@ class UserController extends Controller
             return redirect()->back();
         }
 
-        $user->update($request->all());
+        $data = $request->only(['name','email']);
+
+        if ($request->password) {
+            $data['password'] = bcrypt($request->password);
+        }
+ 
+        $user->update($data);
 
         return redirect()->route('users.index');
     }
