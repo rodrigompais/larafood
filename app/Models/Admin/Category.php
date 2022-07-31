@@ -2,9 +2,13 @@
 
 namespace App\Models\Admin;
 
+use App\Tenant\Observers\TenantObserver;
+use App\Tenant\Traits\TenantTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    protected $fillable = ['name','url','description','tenant_id'];
+    use TenantTrait;
+
+    protected $fillable = ['name', 'url', 'description'/* , 'tenant_id' */];
 }
