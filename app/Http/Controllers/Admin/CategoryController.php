@@ -60,7 +60,11 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        if(!$category = $this->repository->find($id)){
+            return redirect()->back();
+        }
+
+        return view('admin.pages.categories.show', compact('category'));
     }
 
     /**
@@ -71,7 +75,11 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        if(!$category = $this->repository->find($id)){
+            return redirect()->back();
+        }
+
+        return view('admin.pages.categories.edit', compact('category'));
     }
 
     /**
@@ -83,7 +91,15 @@ class CategoryController extends Controller
      */
     public function update(StoreUpdateCategory $request, $id)
     {
-        //
+        if(!$category = $this->repository->find($id)){
+            return redirect()->back();
+        }
+
+        $data = $request->all();
+
+       $category->update($data);
+
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -94,6 +110,35 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if(!$category = $this->repository->find($id)){
+            return redirect()->back();
+        }
+
+        $category->delete();
+
+        return redirect()->route('categories.index');
+    }
+
+    /**
+     * Search result.
+     *
+     * @param  Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        $filters = $request->only('filter');
+
+        $categories = $this->repository
+                            ->where(function($query) use ($request){
+                                if ($request->filter) {
+                                    $query->orWhere('description','LIKE',"%{$request->filter}%");
+                                    $query->orWhere('name', $request->filter);
+                                }
+                            })
+                            ->latest()
+                            ->paginate();
+
+        return view('admin.pages.categories.index', compact('categories','filters'));
     }
 }

@@ -15,7 +15,7 @@ class CategoryObserver
      */
     public function creating(Category $category)
     {
-        $category->url = Str::kebab($category->name);
+        $category->url = Str::slug($category->name);
         //dd($category->url);
     }
 
@@ -27,6 +27,6 @@ class CategoryObserver
      */
     public function updating(Category $category)
     {
-        $category->url = Str::kebab($category->name);
+        $category->url = Str::slug($category->name);
     }
 }
