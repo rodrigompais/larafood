@@ -24,7 +24,7 @@
                         <tr>
                             <td>{{ $profile->name }}</td>
                             <td style="width=10px">
-                                <a href="{{ route('plans.profiles.detach', [$profile->id, $profile->id]) }}"
+                                <a href="{{ route('plans.profiles.detach', [$plan->id, $profile->id]) }}"
                                     class="btn btn-outline-danger btn-sm"><i class="fas fa-trash"></i></a>
                             </td>
                         </tr>
