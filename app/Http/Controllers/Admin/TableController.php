@@ -3,20 +3,21 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreUpdateUser;
-use App\User;
+use App\Http\Requests\StoreUpdateTable;
+use App\Models\Admin\Table;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class TableController extends Controller
 {
-    protected $repository;
+    private $repository;
 
-    public function __construct(User $user)
+    public function __construct(Table $table)
     {
-        $this->repository = $user;
+        $this->repository = $table;
 
-        $this->middleware(['can:users']);
+        $this->middleware(['can:tables']);
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -24,9 +25,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = $this->repository->latest()->tenantUser()->paginate();
+        $tables = $this->repository->latest()->paginate();
 
-        return view('admin.pages.users.index', compact('users'));
+        return view('admin.pages.tables.index', compact('tables'));
     }
 
     /**
@@ -36,24 +37,21 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.pages.users.create');
+        return view('admin.pages.tables.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreUpdateUser $request
+     * @param  \Illuminate\Http\StoreUpdateTable  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreUpdateUser $request)
+    public function store(StoreUpdateTable $request)
     {
         $data = $request->all();
-        $data['tenant_id'] = auth()->user()->tenant_id;
-        $data['password'] = bcrypt($data['password']);
-
         $this->repository->create($data);
 
-        return redirect()->route('users.index');
+        return redirect()->route('tables.index');
     }
 
     /**
@@ -64,11 +62,11 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        if (!$user = $this->repository->tenantUser()->find($id)) {
+        if(!$table = $this->repository->find($id)){
             return redirect()->back();
         }
 
-        return view('admin.pages.users.show', compact('user'));
+        return view('admin.pages.tables.show', compact('table'));
     }
 
     /**
@@ -79,35 +77,31 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        if (!$user = $this->repository->tenantUser()->find($id)) {
+        if(!$table = $this->repository->find($id)){
             return redirect()->back();
         }
 
-        return view('admin.pages.users.edit', compact('user'));
+        return view('admin.pages.tables.edit', compact('table'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\StoreUpdateUser $request
+     * @param  \Illuminate\Http\StoreUpdateTable  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreUpdateUser $request, $id)
+    public function update(StoreUpdateTable $request, $id)
     {
-        if (!$user = $this->repository->tenantUser()->find($id)) {
+        if(!$table = $this->repository->find($id)){
             return redirect()->back();
         }
 
-        $data = $request->only(['name','email']);
+        $data = $request->all();
 
-        if ($request->password) {
-            $data['password'] = bcrypt($request->password);
-        }
+       $table->update($data);
 
-        $user->update($data);
-
-        return redirect()->route('users.index');
+        return redirect()->route('tables.index');
     }
 
     /**
@@ -118,13 +112,13 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        if (!$user = $this->repository->tenantUser()->find($id)) {
+        if(!$table = $this->repository->find($id)){
             return redirect()->back();
         }
 
-        $user->delete();
+        $table->delete();
 
-        return redirect()->route('users.index');
+        return redirect()->route('tables.index');
     }
 
     /**
@@ -137,17 +131,16 @@ class UserController extends Controller
     {
         $filters = $request->only('filter');
 
-        $users = $this->repository
+        $tables = $this->repository
                             ->where(function($query) use ($request){
                                 if ($request->filter) {
-                                    $query->orWhere('name','LIKE',"%{$request->filter}%");
-                                    $query->orWhere('email', $request->filter);
+                                    $query->orWhere('description','LIKE',"%{$request->filter}%");
+                                    $query->orWhere('identify', $request->filter);
                                 }
                             })
                             ->latest()
-                            ->tenantUser()
                             ->paginate();
 
-        return view('admin.pages.users.index', compact('users','filters'));
+        return view('admin.pages.tables.index', compact('tables','filters'));
     }
 }
