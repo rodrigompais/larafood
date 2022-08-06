@@ -7,6 +7,12 @@ Route::prefix('admin')
     ->group(function () {
 
         /**
+         * Routes Tenants
+         */
+        Route::any('tenants/search', 'TenantController@search')->name('tenants.search');
+        Route::resource('tenants', 'TenantController');
+
+        /**
          * Routes Tables
          */
         Route::any('tables/search', 'TableController@search')->name('tables.search');
@@ -92,6 +98,12 @@ Route::prefix('admin')
         Route::post('plans', 'PlanController@store')->name('plans.store');
         Route::get('plans', 'PlanController@index')->name('plans.index');
     });
+
+    /**
+     * Home Dashboard
+     */
+
+    Route::get('/', 'PlanController@index')->name('admin.index');
 
     /**
      * Site
