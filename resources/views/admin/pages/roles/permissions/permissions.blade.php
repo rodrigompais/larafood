@@ -1,11 +1,11 @@
 @extends('adminlte::page')
 
-@section('title', "Permissões do perfil {$profile->name}")
+@section('title', "Permissões do perfil {$role->name}")
 
 @section('content_header')
-    <h1>Permissões do perfil <strong>{{ $profile->name }}</strong>
-        <a href="{{ route('profiles.permissions.available', $profile->id) }}" class="btn btn-dark">
-            <i class="fa fa-plus" aria-hidden="true"></i> ADD NOVA PERMISSÃO</a>
+    <h1>Permissões do Cargo <strong>{{ $role->name }}</strong>
+        <a href="{{ route('roles.permissions.available', $role->id) }}" class="btn btn-dark">
+            <i class="fa fa-plus" aria-hidden="true"></i> ADD NOVA CARGO</a>
     </h1>
 @stop
 
@@ -24,7 +24,7 @@
                         <tr>
                             <td>{{ $permission->name }}</td>
                             <td style="width=10px">
-                                <a href="{{ route('profiles.permissions.detach', [$profile->id, $permission->id]) }}"
+                                <a href="{{ route('roles.permissions.detach', [$role->id, $permission->id]) }}"
                                     class="btn btn-outline-danger btn-sm"><i class="fas fa-trash"></i></a>
                             </td>
                         </tr>

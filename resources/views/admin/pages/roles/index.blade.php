@@ -33,7 +33,9 @@
                                 <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-outline-info btn-sm"><i
                                         class="fas fa-edit"></i></a>
                                 <a href="{{ route('roles.show', $role->id) }}" class="btn btn-outline-warning btn-sm"><i
-                                        class="fas fa-eye"></i></a>                               
+                                        class="fas fa-eye"></i></a>
+                                <a href="{{ route('roles.permissions', $role->id) }}"
+                                    class="btn btn-outline-primary btn-sm"><i class="fas fa-lock"></i></a>
                             </td>
                         </tr>
                     @endforeach
