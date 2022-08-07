@@ -3,7 +3,8 @@
 @section('title', 'Usuários')
 
 @section('content_header')
-    <h1>Usuários <a href="{{ route('users.create') }}" class="btn btn-dark"><i class="fa fa-plus" aria-hidden="true"></i> ADD</a>
+    <h1>Usuários <a href="{{ route('users.create') }}" class="btn btn-dark"><i class="fa fa-plus" aria-hidden="true"></i>
+            ADD</a>
     </h1>
 @stop
 
@@ -23,7 +24,7 @@
                     <tr>
                         <th>Nome</th>
                         <th>E-mail</th>
-                        <th class="text-center" width="90">Ações</th>
+                        <th class="text-center" width="125">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,11 +34,14 @@
                             <td>{{ $user->email }}</td>
                             <td style="width=10px">
                                 <a href="{{ route('users.edit', $user->id) }}" class="btn btn-outline-primary btn-sm"
-                                    data-toggle="tooltip" data-placement="top" title="Editar Plano"><i
+                                    data-toggle="tooltip" data-placement="top" title="Editar"><i
                                         class="fas fa-edit"></i></a>
                                 <a href="{{ route('users.show', $user->id) }}" class="btn btn-outline-warning btn-sm"
-                                    data-toggle="tooltip" data-placement="top" title="Visualizar Plano"><i
+                                    data-toggle="tooltip" data-placement="top" title="Visualizar"><i
                                         class="fas fa-eye"></i></a>
+                                <a href="{{ route('users.roles', $user->id) }}" class="btn btn-outline-success btn-sm"
+                                    data-toggle="tooltip" data-placement="top" title="Cargos"><i
+                                        class="fas fa-address-card"></i></a>
                             </td>
                         </tr>
                     @endforeach
@@ -52,7 +56,7 @@
             @endif
         </div>
     </div>
-{{--     <script>
+    {{-- <script>
         $(function() {
             $('[data-toggle="tooltip"]').tooltip()
         })

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Admin\Role;
 use App\Models\Admin\Tenant;
 use App\Models\Admin\Traits\UserACLTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -40,11 +41,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function tenant()
-    {
-        return $this->belongsTo(Tenant::class);
-    }
-
     /**
      * Scope a query to only users by tenant.
      *
@@ -52,8 +48,35 @@ class User extends Authenticatable
      * @return \Illuminate\Database\Eloquent\Builder
      */
 
-     public function scopeTenantUser(Builder $query)
+    public function scopeTenantUser(Builder $query)
+    {
+       return $query->where('tenant_id', auth()->user()->tenant_id);
+    }
+
+    public function tenant()
+    {
+        return $this->belongsTo(Tenant::class);
+    }
+
+     public function roles()
      {
-        return $query->where('tenant_id', auth()->user()->tenant_id);
+         return $this->belongsToMany(Role::class);
      }
+
+     
+    public function rolesAvailable($filter = null)
+    {
+        $roles = Role::whereNotIn('roles.id', function ($query) {
+            $query->select('role_user.role_id');
+            $query->from('role_user');
+            $query->whereRaw("role_user.user_id={$this->id}");
+        })
+            ->where(function ($queryFilter) use ($filter) {
+                if ($filter)
+                    $queryFilter->where('roles.name', 'LIKE', "%{$filter}%");
+            })
+            ->paginate();
+
+        return $roles;
+    }
 }
