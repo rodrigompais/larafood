@@ -18,6 +18,7 @@ class TenantResouce extends JsonResource
         //return parent::toArray($request);
         return [
             'name' => $this->name,
+            'image' => $this->logo ? url("storage/{$this->logo}") : "",
             'uuid' => $this->uuid,
             'flag' => $this->url,
             'contact' => $this->email,
