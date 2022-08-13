@@ -1,10 +1,19 @@
 <?php
 
+/* use App\Models\Admin\Client;
+
+Route::get('teste', function(){
+    $client = Client::first();
+
+    $token = $client->createToken('token-teste');
+
+    dd($token->plainTextToken);
+}); */
 
 Route::prefix('admin')
     ->namespace('Admin')
     ->middleware('auth')
-    ->group(function () {
+    ->group(function () {       
 
         /**
          * Routes Role x User
