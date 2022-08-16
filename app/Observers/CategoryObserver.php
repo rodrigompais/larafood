@@ -16,7 +16,7 @@ class CategoryObserver
     public function creating(Category $category)
     {
         $category->url = Str::slug($category->name);
-        //dd($category->url);
+        $category->uuid = Str::uuid();
     }
 
     /**
