@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Api\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,7 +24,18 @@ class StoreOrder extends FormRequest
     public function rules()
     {
         return [
-            //
+            'token_company' => [
+                'required',
+                'exists:tenants,uuid'
+            ],
+            'table' => [
+                'nullable',
+                'exists:tables,uuid'
+            ],
+            'comment' => [
+                'nullable',
+                'max:1000',
+            ]
         ];
     }
 }
