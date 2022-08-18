@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Api\Requests;
+namespace App\Http\Requests\Api;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -13,7 +13,7 @@ class StoreOrder extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
