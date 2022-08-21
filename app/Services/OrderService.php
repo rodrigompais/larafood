@@ -46,6 +46,8 @@ class OrderService
             $tableId
         );
 
+        $this->orderRepository->registerProductsOrder($order->id, $productsOrder);
+
         return $order;
     }
 
@@ -79,7 +81,7 @@ class OrderService
                 'price' => $product->price,
             ]);
         }
-
+        
         return $products;
     }
 
