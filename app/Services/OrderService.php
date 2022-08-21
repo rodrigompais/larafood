@@ -27,7 +27,7 @@ class OrderService
     public function createNewOrder(array $order)
     {
         $productsOrder = $this->getProductsByOrder($order['products'] ?? []);
-
+        
         $identify = $this->getIdentifyOrder();
         $total = $this->getTotalOrder($productsOrder);
         $status = 'open';
@@ -45,9 +45,9 @@ class OrderService
             $clientId,
             $tableId
         );
-
+        
         $this->orderRepository->registerProductsOrder($order->id, $productsOrder);
-
+        
         return $order;
     }
 
@@ -81,7 +81,7 @@ class OrderService
                 'price' => $product->price,
             ]);
         }
-        
+
         return $products;
     }
 
@@ -103,7 +103,7 @@ class OrderService
         return $tenant->id;
     }
 
-    private function getTableIdByOrder(string $uuid = '')
+    /* private function getTableIdByOrder(string $uuid = '')
     {
         if ($uuid) {
             $table = $this->tableRepository->getTableByUuid($uuid);
@@ -116,6 +116,21 @@ class OrderService
 
     private function getClientIdByOrder()
     {
-        $client = auth()->check() ? auth()->user()->id : '';
+        return auth()->check() ? auth()->user()->id : '';
+    } */
+    private function getTableIdByOrder(string $uuid = '')
+    {
+        if ($uuid) {
+            $table = $this->tableRepository->getTableByUuid($uuid);
+            
+            return $table->id;
+        }
+
+        return '';
+    }
+
+    private function getClientIdByOrder()
+    {
+        return auth()->check() ? auth()->user()->id : '';
     }
 }
