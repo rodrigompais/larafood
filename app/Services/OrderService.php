@@ -24,6 +24,13 @@ class OrderService
         $this->productRepository = $productRepository;
     }
 
+    public function orderByClient()
+    {
+        $idClient = $this->getClientIdByOrder();
+
+        return $this->orderRepository->getOrdersByClientId($idClient);
+    }
+
     public function getOrderByIdentify(string $identify)
     {
         return $this->orderRepository->getOrderByIdentify($identify);
@@ -108,21 +115,6 @@ class OrderService
         return $tenant->id;
     }
 
-    /* private function getTableIdByOrder(string $uuid = '')
-    {
-        if ($uuid) {
-            $table = $this->tableRepository->getTableByUuid($uuid);
-
-            return $table->id;
-        }
-
-        return '';
-    }
-
-    private function getClientIdByOrder()
-    {
-        return auth()->check() ? auth()->user()->id : '';
-    } */
 
     private function getTableIdByOrder(string $uuid = '')
     {
