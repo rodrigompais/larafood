@@ -24,6 +24,11 @@ class OrderService
         $this->productRepository = $productRepository;
     }
 
+    public function getOrderByIdentify(string $identify)
+    {
+        return $this->orderRepository->getOrderByIdentify($identify);
+    }
+
     public function createNewOrder(array $order)
     {
         $productsOrder = $this->getProductsByOrder($order['products'] ?? []);
@@ -45,7 +50,7 @@ class OrderService
             $clientId,
             $tableId
         );
-        
+                
         $this->orderRepository->registerProductsOrder($order->id, $productsOrder);
         
         return $order;
@@ -118,6 +123,7 @@ class OrderService
     {
         return auth()->check() ? auth()->user()->id : '';
     } */
+
     private function getTableIdByOrder(string $uuid = '')
     {
         if ($uuid) {
