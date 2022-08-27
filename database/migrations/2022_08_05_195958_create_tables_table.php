@@ -17,8 +17,8 @@ class CreateTablesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('tenant_id');
             $table->uuid('uuid');
-            $table->string('identify')->unique();
-            $table->text('description');
+            $table->string('identify');
+            $table->text('description')->nullable();
             $table->timestamps();
 
             $table->foreign('tenant_id')
