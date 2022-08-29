@@ -9,118 +9,100 @@
 @section('content')
     <div class="row">
         @admin()
-            <div class="col-lg-3 col-6">
-                <div class="small-box bg-info">
-                    <div class="inner">
-                        <h3>{{ $totalUsers }}</h3>
-                        <p>Usuários</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fas fa-users"></i>
+            <div class="col-md-3 col-sm-6 col-12">
+                <div class="info-box">
+                    <span class="info-box-icon bg-info"><i class="fas fa-users"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Usuários</span>
+                        <span class="info-box-number">{{ $totalUsers }}</span>
                     </div>
                 </div>
             </div>
         @endadmin
         @admin()
-            <div class="col-lg-3 col-6">
-                <div class="small-box bg-info">
-                    <div class="inner">
-                        <h3>{{ $totalTables }}</h3>
-                        <p>Mesas</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fas fa-table"></i>
+            <div class="col-md-3 col-sm-6 col-12">
+                <div class="info-box">
+                    <span class="info-box-icon bg-info"><i class="fas fa-table"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Mesas</span>
+                        <span class="info-box-number">{{ $totalTables }}</span>
                     </div>
                 </div>
             </div>
         @endadmin
         @admin()
-            <div class="col-lg-3 col-6">
-                <div class="small-box bg-info">
-                    <div class="inner">
-                        <h3>{{ $totalCategories }}</h3>
-                        <p>Categorias</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fas fa-layer-group"></i>
+            <div class="col-md-3 col-sm-6 col-12">
+                <div class="info-box">
+                    <span class="info-box-icon bg-info"><i class="fas fa-layer-group"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Categorias</span>
+                        <span class="info-box-number">{{ $totalCategories }}</span>
                     </div>
                 </div>
             </div>
         @endadmin
         @admin()
-            <div class="col-lg-3 col-6">
-                <div class="small-box bg-info">
-                    <div class="inner">
-                        <h3>{{ $totalProducts }}</h3>
-                        <p>Produtos</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fas fa-hamburger"></i>
+            <div class="col-md-3 col-sm-6 col-12">
+                <div class="info-box">
+                    <span class="info-box-icon bg-info"><i class="fas fa-hamburger"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Produtos</span>
+                        <span class="info-box-number">{{ $totalProducts }}</span>
                     </div>
                 </div>
             </div>
         @endadmin
         @admin()
-            <div class="col-lg-3 col-6">
-                <div class="small-box bg-info">
-                    <div class="inner">
-                        <h3>{{ $totalTenants }}</h3>
-                        <p>Empresas</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fas fa-building"></i>
+            <div class="col-md-3 col-sm-6 col-12">
+                <div class="info-box">
+                    <span class="info-box-icon bg-info"><i class="fas fa-building"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Empresas</span>
+                        <span class="info-box-number">{{ $totalTenants }}</span>
                     </div>
                 </div>
             </div>
         @endadmin
         @admin()
-            <div class="col-lg-3 col-6">
-                <div class="small-box bg-info">
-                    <div class="inner">
-                        <h3>{{ $totalPlans }}</h3>
-                        <p>Planos</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fas fa-list-alt"></i>
+            <div class="col-md-3 col-sm-6 col-12">
+                <div class="info-box">
+                    <span class="info-box-icon bg-info"><i class="fas fa-list-alt"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Planos</span>
+                        <span class="info-box-number">{{ $totalPlans }}</span>
                     </div>
                 </div>
             </div>
         @endadmin
         @admin()
-            <div class="col-lg-3 col-6">
-                <div class="small-box bg-info">
-                    <div class="inner">
-                        <h3>{{ $totalRoles }}</h3>
-                        <p>Cargos</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fas fa-address-card"></i>
+            <div class="col-md-3 col-sm-6 col-12">
+                <div class="info-box">
+                    <span class="info-box-icon bg-info"><i class="fas fa-address-card"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Cargos</span>
+                        <span class="info-box-number">{{ $totalRoles }}</span>
                     </div>
                 </div>
             </div>
         @endadmin
         @admin()
-            <div class="col-lg-3 col-6">
-                <div class="small-box bg-info">
-                    <div class="inner">
-                        <h3>{{ $totalProfiles }}</h3>
-                        <p>Perfis</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fas fa-address-book"></i>
+            <div class="col-md-3 col-sm-6 col-12">
+                <div class="info-box">
+                    <span class="info-box-icon bg-info"><i class="fas fa-address-book"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Perfis</span>
+                        <span class="info-box-number">{{ $totalProfiles }}</span>
                     </div>
                 </div>
             </div>
         @endadmin
         @admin()
-            <div class="col-lg-3 col-6">
-                <div class="small-box bg-info">
-                    <div class="inner">
-                        <h3>{{ $totalPermissions }}</h3>
-                        <p>Permissões</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fas fa-lock"></i>
+            <div class="col-md-3 col-sm-6 col-12">
+                <div class="info-box">
+                    <span class="info-box-icon bg-info"><i class="fas fa-lock"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Permissões</span>
+                        <span class="info-box-number">{{ $totalPermissions }}</span>
                     </div>
                 </div>
             </div>
